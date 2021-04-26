@@ -1,5 +1,5 @@
-import { Component } from "react";
-
+import React, { Component } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import "./App.css";
 import "./components/HeaDer.css";
 import HeaDer from "./components/HeaDer";
@@ -23,10 +23,11 @@ class App extends Component {
 
       idToDoEditing : null,
       toDoEditing: {},
-      indexTodoEditing: 0,
+      indexTodoEditing: 1,
 
       isCompletedAll: false,
     };
+    this.headerRef = React.createRef();
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -61,7 +62,7 @@ class App extends Component {
     const { toDoList } = this.state;
     this.setState({
       toDoList: [
-        { id: Math.random(), title: value, isComplete: false },
+        { id: uuidv4(), title: value, isComplete: false },
         ...this.state.toDoList,
       ],
     });
@@ -83,19 +84,25 @@ class App extends Component {
 
   handleUpdate = (title) => {
     const { toDoList, toDoEditing } = this.state;
-    debugger;
-    console.log('toDoList', toDoList);
-    toDoEditing.title = title;
-    let indexEdit
-    toDoList.map((item, index) => {
-      if(item.id === toDoEditing.id) {
-        indexEdit = index
-      }
-    });
+    // debugger;
+    // console.log('toDoList', toDoList);
+    // toDoEditing.title = title;
+    // let indexEdit
+    // toDoList.map((item, index) => {
+    //   if(item.id === toDoEditing.id) {
+    //     indexEdit = index
+    //   }
+    // });
+    // const newToDoList = [...toDoList];
+    // newToDoList.splice(indexEdit, 1, toDoEditing);
     const newToDoList = [...toDoList];
-    newToDoList.splice(indexEdit, 1, toDoEditing);
+    for(let item of newToDoList) {
+      if(item.id === toDoEditing.id) {
+        item.title = title;
+      }
+    }
 
-    indexEdit && this.setState({
+    this.setState({
       toDoList: [...newToDoList],
       toDoEditing: null,
       indexTodoEditing: null,
@@ -126,9 +133,19 @@ class App extends Component {
     this.setState({
       idToDoEditing: item.id,
       toDoEditing: item,
-      //indexTodoEditing: toDoIndex,
+    //   //indexTodoEditing: toDoIndex,
     });
+    // call func của header => update state "value" trong comp header
+    // ========================
+    // /*this.headerRef && this.headerRef.current &&*/
+    //this.headerRef.current.onclick();
+    // this.headerRef.current.setValue(item.title);
+    console.log('ref', this.headerRef.current); // MongLV log fix bug
   };
+  // handleF = (item) => {
+  //   this.headerRef.current.setValue(item.title);
+  //
+  // }
 
   // check all
   checkAll = () => {
@@ -187,6 +204,10 @@ class App extends Component {
     });
   };
 
+  // onC = () => {
+  //   this.headerRef && this.headerRef.current && this.headerRef.current.onclick();
+  // }
+
   render() {
     const {
       toDoListView,
@@ -197,11 +218,14 @@ class App extends Component {
       toDoList,
       isCompletedAll,
     } = this.state;
-    console.log(toDoList);
+    // console.log('headerRef: ', this.headerRef);
     const numberToDoActive = this.getNumberToDoActive();
 
     return (
       <div className="App">
+        {/*<button className="button" onClick={this.itemClick}>*/}
+        {/*  Submit*/}
+        {/*</button>*/}
         <HeaDer
           isCompletedAl={isCompletedAll}
           idToDoEditing={idToDoEditing}
@@ -211,8 +235,10 @@ class App extends Component {
           addToDo={this.addToDo}
           checkAllApp={this.checkAll}
           handleUpdate={this.handleUpdate}
+          // ref={this.headerRef}
         />
         <ToDoList
+            // ref={this.headerRef}
           toDoListView={toDoListView}
           onChangeUnderlinedApp={this.clickUnderlined}
           onDeleteApp={this.onDelete}

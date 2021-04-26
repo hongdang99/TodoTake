@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component, createRef} from "react";
 import "./HeaDer.css";
 import checkAll from "./images/checkall.svg";
 class HeaDer extends Component {
@@ -7,7 +7,9 @@ class HeaDer extends Component {
     this.state = {
       value: "",
       idEdit: null,
+
     };
+    // this.Update = React.createRef()
   }
 
 
@@ -33,6 +35,7 @@ class HeaDer extends Component {
     const { value } = this.state;
     debugger;
     const { handleUpdate, toDoEditing, addToDo } = this.props;
+    console.log(handleUpdate,toDoEditing,addToDo)
     if (Object.keys(toDoEditing).length !== 0 && typeof toDoEditing === 'object') {
       handleUpdate(value);
     } else if (value.length > 0) {
@@ -82,11 +85,11 @@ class HeaDer extends Component {
           value={this.state.value}
           onChange={this.handleInput}
           autoFocus
-
         />
         <button className="button" onClick={this.onclick}>
           Submit
         </button>
+
         <hr/>
       </div>
     );
