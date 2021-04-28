@@ -131,9 +131,9 @@ class App extends Component {
     console.log('id', item.id);
     console.log('item', item);
     this.setState({
-      idToDoEditing: item.id,
+      // idToDoEditing: item.id,
       toDoEditing: item,
-    //   //indexTodoEditing: toDoIndex,
+      //indexTodoEditing: toDoIndex,
     });
     // call func của header => update state "value" trong comp header
     // ========================
@@ -141,6 +141,7 @@ class App extends Component {
     //this.headerRef.current.onclick();
     // this.headerRef.current.setValue(item.title);
     console.log('ref', this.headerRef.current); // MongLV log fix bug
+    this.headerRef.current.setValue(item)
   };
   // handleF = (item) => {
   //   this.headerRef.current.setValue(item.title);
@@ -235,7 +236,7 @@ class App extends Component {
           addToDo={this.addToDo}
           checkAllApp={this.checkAll}
           handleUpdate={this.handleUpdate}
-          // ref={this.headerRef}
+           ref={this.headerRef}
         />
         <ToDoList
             // ref={this.headerRef}

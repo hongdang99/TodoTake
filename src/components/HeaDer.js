@@ -13,30 +13,34 @@ class HeaDer extends Component {
   }
 
 
-  componentDidUpdate(prevProps) {
-
-    if (
-      this.props.idToDoEditing !== prevProps.idToDoEditing &&
-      this.props.toDoEditing
-    ) {
-      this.setState({
-        value: this.props.toDoEditing.title,
-      });
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //
+  //   if (
+  //     this.props.idToDoEditing !== prevProps.idToDoEditing &&
+  //     this.props.toDoEditing
+  //   ) {
+  //     this.setState({
+  //       value: this.props.toDoEditing.title,
+  //     });
+  //   }
+  // }
   
-  setValue = (title) => {
+  setValue = (item) => {
+    console.log('item', item); // MongLV log fix bug
+    const {title, id} = item;
     this.setState({
       value: title,
+      idEdit: id,
     });
   };
 
   onclick = () => {
-    const { value } = this.state;
+    const { value, idEdit } = this.state;
     debugger;
     const { handleUpdate, toDoEditing, addToDo } = this.props;
     console.log(handleUpdate,toDoEditing,addToDo)
-    if (Object.keys(toDoEditing).length !== 0 && typeof toDoEditing === 'object') {
+    // if (Object.keys(toDoEditing).length !== 0 && typeof toDoEditing === 'object') {
+    if (idEdit) {
       handleUpdate(value);
     } else if (value.length > 0) {
       addToDo(value);
