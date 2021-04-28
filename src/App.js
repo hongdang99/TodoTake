@@ -138,9 +138,9 @@ class App extends Component {
     // call func của header => update state "value" trong comp header
     // ========================
     // /*this.headerRef && this.headerRef.current &&*/
-    //this.headerRef.current.onclick();
+
     // this.headerRef.current.setValue(item.title);
-    console.log('ref', this.headerRef.current); // MongLV log fix bug
+    console.log('ref', this.headerRef.current);
     this.headerRef.current.setValue(item)
   };
   // handleF = (item) => {
