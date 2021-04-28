@@ -26,7 +26,7 @@ class HeaDer extends Component {
   // }
   
   setValue = (item) => {
-    console.log('item', item); // MongLV log fix bug
+    console.log('item', item);
     const {title, id} = item;
     this.setState({
       value: title,

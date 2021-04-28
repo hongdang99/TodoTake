@@ -19,7 +19,7 @@ class Item extends Component {
 
   onChangeItem = () => {
     const { onClickItemToDoList, item } = this.props;
-    console.log('onClickToDoList',onClickItemToDoList ); // MongLV log fix bug
+    console.log('onClickToDoList',onClickItemToDoList );
     onClickItemToDoList(item);
   };
 

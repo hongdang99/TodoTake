@@ -24,9 +24,9 @@ class ToDoList extends Component {
         {toDoListView.map((item, index) => {
           return (
             <Item
-              key={item.id}
+              // key={item.id}
               item={item}
-              idToDo={item.id}
+              // idToDo={item.id}
               onChangeToDoList={onChangeUnderlinedApp}
               onDeleteToDoList={onDeleteApp}
               onClickItemToDoList={onClickItemApp}
