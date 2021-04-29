@@ -1,1 +1,25 @@
 .App {}
+.ButtonChange > button {
+    margin: 5%;
+    display: inline-block;
+    padding: 8px 19px;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    /*color: #e26e29;*/
+    font-weight: bold;
+    background-color: #3ee144;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 9px #c4d3b95e;
+}
+
+.ButtonChange > button:hover {
+    background-color: #4bbe4e;
+}
+
+.ButtonChange > button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}

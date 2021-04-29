@@ -76,7 +76,8 @@ class HeaDer extends Component {
       isCompletedAll,
     } = this.props;
     return (
-      <div className="Header">
+
+        <div className="Header">
         <img
           style={{ opacity: isCompletedAll ? 1 : 0.5 }}
           className="image"
@@ -96,6 +97,7 @@ class HeaDer extends Component {
 
         <hr/>
       </div>
+
     );
   }
 }

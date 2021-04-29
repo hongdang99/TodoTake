@@ -5,7 +5,7 @@ import "./components/HeaDer.css";
 import HeaDer from "./components/HeaDer";
 import ToDoList from "./components/ToDoList";
 import Footer from "./components/Footer";
-
+import {ThemeContext} from "./context/ThemeContext";
 
 class App extends Component {
   constructor(props) {
@@ -221,45 +221,57 @@ class App extends Component {
     } = this.state;
     // console.log('headerRef: ', this.headerRef);
     const numberToDoActive = this.getNumberToDoActive();
-
+    let { theme, toggleTheme } = this.context;
     return (
-      <div className="App">
-        {/*<button className="button" onClick={this.itemClick}>*/}
-        {/*  Submit*/}
-        {/*</button>*/}
-        <HeaDer
-          isCompletedAl={isCompletedAll}
-          idToDoEditing={idToDoEditing}
-          toDoEditing={toDoEditing}
+          <div
+              className="ButtonChange"
+              style={{
+                background: theme.background,
+                minHeight: "100vh",
+                color: theme.foreground,
+              }}
+              // style={{}}
+          >
+            <button  onClick={toggleTheme}> Click </button>
+            <div className="App">
+              {/*<button className="button" onClick={this.itemClick}>*/}
+              {/*  Submit*/}
+              {/*</button>*/}
+              <HeaDer
+                  isCompletedAl={isCompletedAll}
+                  idToDoEditing={idToDoEditing}
+                  toDoEditing={toDoEditing}
 
-          indexTodoEditing={indexTodoEditing}
-          addToDo={this.addToDo}
-          checkAllApp={this.checkAll}
-          handleUpdate={this.handleUpdate}
-           ref={this.headerRef}
-        />
-        <ToDoList
-            // ref={this.headerRef}
-          toDoListView={toDoListView}
-          onChangeUnderlinedApp={this.clickUnderlined}
-          onDeleteApp={this.onDelete}
-          onClickItemApp={this.itemClick}
-          onClickActive={this.props.onClickActive}
-          checkItem={this.checkItem}
-          onClickA={this.onClickA}
-        />
-        {(toDoList.length > 0) && (
-          <Footer
-            toDoList={toDoList}
-            numberToDoActive={numberToDoActive}
-            updateStatusShow={this.updateStatusShow}
-            statusShow={statusShow}
-            removeAllToDoListCompleted={this.removeAllToDoListCompleted}
-          />
-        )}
-      </div>
+                  indexTodoEditing={indexTodoEditing}
+                  addToDo={this.addToDo}
+                  checkAllApp={this.checkAll}
+                  handleUpdate={this.handleUpdate}
+                  ref={this.headerRef}
+              />
+              <ToDoList
+                  // ref={this.headerRef}
+                  toDoListView={toDoListView}
+                  onChangeUnderlinedApp={this.clickUnderlined}
+                  onDeleteApp={this.onDelete}
+                  onClickItemApp={this.itemClick}
+                  onClickActive={this.props.onClickActive}
+                  checkItem={this.checkItem}
+                  onClickA={this.onClickA}
+              />
+              {(toDoList.length > 0) && (
+                  <Footer
+                      toDoList={toDoList}
+                      numberToDoActive={numberToDoActive}
+                      updateStatusShow={this.updateStatusShow}
+                      statusShow={statusShow}
+                      removeAllToDoListCompleted={this.removeAllToDoListCompleted}
+                  />
+              )}
+            </div>
+          </div>
+
     );
   }
 }
-
+App.contextType = ThemeContext;
 export default App;

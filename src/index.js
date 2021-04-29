@@ -4,11 +4,39 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import {themes, ThemeContext} from "./context/ThemeContext";
 
+const hocCreator = WrappedComponent => {
+    return class NameClass extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                theme: themes.light
+            };
+        }
+
+        toggleTheme = () => {
+          this.setState((state) => ({
+            theme: state.theme === themes.dark ? themes.light : themes.dark
+          }));
+        };
+
+        render() {
+            return(
+                <ThemeContext.Provider
+                    value={{
+                    theme: this.state.theme,
+                    toggleTheme: this.toggleTheme
+                }}>
+                    <WrappedComponent {...this.props} {...this.state} />
+                </ThemeContext.Provider>
+            );
+        }
+    }
+};
+const HOCCreator = hocCreator(App)
 ReactDOM.render(
-  <>
-    <App />
-  </>,
+  <HOCCreator />,
   document.getElementById('root')
 );
 
